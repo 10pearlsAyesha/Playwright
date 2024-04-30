@@ -1,0 +1,29 @@
+{
+  "name": "jeenie-automation-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "env-cmd -f .env.dev npx playwright test --headed --project=chromium --reporter=html",
+    "update-screenshot": "env-cmd -f .env.dev npx playwright test --update-snapshots --project=chromium --grep @snapshot",
+    "safari-test": "env-cmd -f .env.dev npx playwright test --project=safari --headed",
+    "all-browser-test": "env-cmd -f .env.dev npx playwright test --headed",
+    "disable-parallel-test": "env-cmd -f .env.dev npx playwright test --workers=1 --headed --reporter=dot",
+    "mobile-view-test": "env-cmd -f .env.dev npx playwright test --project='Mobile Chrome'",
+    "debug-test": "env-cmd -f .env.dev npx playwright test --debug --headed",
+    "grp-test": "env-cmd -f .env.dev npx playwright test --grep @smoke",
+    "htmlReport-test": "env-cmd -f .env.dev npx playwright test --headed --reporter=html",
+    "record-test": "npx playwright codegen https://www.saucedemo.com/",
+    "allure-report-test": "env-cmd -f .env.devnpx playwright test --reporter=line,allure-playwright",
+    "open-allure-report": "allure generate ./allure-results --clean && allure open ./allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.7",
+    "assert": "^2.0.0",
+    "env-cmd": "^10.1.0"
+  }
+}
