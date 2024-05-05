@@ -17,6 +17,8 @@ class initiateCallCase {
     this.cancelCallButton = page.locator("(//img[@class='hang-up'])[2]");
     this.cancelCallConfirmationModal = page.locator(".cancel-call-card.v-card.v-sheet.theme--light");
     this.yesCancelCallButton = page.locator("//span[@class='v-btn__content'][contains(text(),'" + `${process.env.yes_cancel_call_button_text}` + "')]");
+    this.addPaymentModal = page.locator(".v-dialog.v-dialog--active.v-dialog--persistent");
+    this.paymentModalSkipLink = page.locator("//span[@class='v-btn__content'][contains(text(),'" + `${process.env.skip_and_place_call_text}` + "')]");
   }
 
   //Actions  

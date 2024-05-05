@@ -51,17 +51,26 @@ module.exports = defineConfig({
           // Configure the device to simulate a desktop screen
           ...devices['Desktop Chrome'],
           // Configure the launch options for Chromium
+          viewport: { width: 1520, height: 855 },
           launchOptions: {
             args: ['--start-maximized'] // Start Chromium with a maximized window
           },
-//          viewport: { width: 1520, height: 855 }
         }
       }
 /*
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+      use: {
+        browserName: 'firefox',
+        launchOptions: {
+          firefoxUserPrefs: {
+            'permissions.default.microphone': 1,
+            'permissions.default.camera': 1,
+            'permissions.default.notifications': 1,
+          },
+        },
+      }
+   },
 
     {
       name: 'webkit',

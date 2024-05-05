@@ -4,7 +4,7 @@ class submitRatingCase {
     this.page = page;
     this.historyTab = page.locator("//div[@class='app-menu-items']//div//a//div[@class='v-list-item__title'][contains(text(),'" + `${process.env.history_tab_text}` + "')]");
     this.rejoinModalCloseButton = page.locator("//div[@class='in-call-status pa-8 v-card v-sheet theme--light']//button[@class='v-btn v-btn--icon v-btn--round theme--light v-size--default']");
-    this.actionRequired = page.locator("//tbody//tr//td[3]//button//span//i[@class='v-icon notranslate ma-1 alert mdi mdi-alert theme--light'][1]");
+    this.actionRequired = page.locator("(//tbody//tr//td[3]//div//button//span//i[@class='v-icon notranslate alert mdi mdi-alert theme--light'])[1]");
     this.addRatingButton = page.locator("//span[@class='v-btn__content']//span[contains(text(),'" + `${process.env.add_rating_button_text}` + "')]");
     this.howDidIDoRating = page.locator("(//div[@class='ml-2 pt-1'])[1]//div[@class='v-rating stars pl-1']//button[@aria-label='" + `${process.env.how_did_I_do_rating_label}` + "']");
     this.whatCanIImproveTag = page.locator("(//div[@class='d-flex flex-wrap align-center justify-center'])[1]//button[2]");
@@ -18,11 +18,11 @@ class submitRatingCase {
   async submitRatingThroughHistory() {
     await this.historyTab.click();
 
-    try {
-      await this.rejoinModalCloseButton.click();
-    } catch (error) {
-      //do nothing
-    }
+    // try {
+    //   await this.rejoinModalCloseButton.click();
+    // } catch (error) {
+    //   //do nothing
+    // }
 
     try {
       await this.actionRequired.click();
