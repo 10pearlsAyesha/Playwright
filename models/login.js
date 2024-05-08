@@ -16,12 +16,12 @@ class LoginPage {
     await this.password.type(`${process.env.customer_password}`);
     await this.loginButton.click();
 
-    // try {
-    //   await this.ratingModalCloseButton.click();
-    //   await this.rejoinModalCloseButton.click();
-    // } catch (error) {
-    //   //do nothing
-    // }
+//     try {
+//       await this.ratingModalCloseButton.click();
+// //      await this.rejoinModalCloseButton.click();
+//     } catch (error) {
+//       //do nothing
+//     }
   }
 
   async loginLinguist() {

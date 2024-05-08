@@ -13,13 +13,6 @@ test.describe("Login Page", () => {
 
     await loginPage.loginCustomer();
 
-    try {
-      await loginPage.ratingModalCloseButton.click();
-      await loginPage.rejoinModalCloseButton.click();
-    } catch (error) {
-      //do nothing
-    }
-
     await expect(loginPage.getAJeeniePage).toBeVisible();  
   });
 });

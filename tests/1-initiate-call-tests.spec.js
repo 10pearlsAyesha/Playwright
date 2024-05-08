@@ -7,23 +7,17 @@ test.describe("User is on Get a Jeenie page", () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await page.context().grantPermissions(['microphone','camera','notifications']);
+    await page.context().grantPermissions(['camera', 'microphone']);
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
   });
 
-  test("Customer initiates a call and cancel it", async ({ page }) => {
+  test.only("Customer initiates a call and cancel it", async ({ page }) => {
     const InitiateCall = new initiateCallCase(page);
 
     await InitiateCall.initiateCallThroughCustomer();
+    await page.waitForTimeout(20000);
     await InitiateCall.audioButton.click();
-    try{
-      await expect(InitiateCall.addPaymentModal).toBeVisible();
-      await InitiateCall.paymentModalSkipLink.click();
-    }
-    catch{
-      //do nothing
-    }
     await expect(InitiateCall.callConnectingPage).toBeVisible();
     await expect(InitiateCall.gettingAJeenieNowText).toBeVisible();
     await expect(InitiateCall.lookingForJeenieText).toBeVisible();

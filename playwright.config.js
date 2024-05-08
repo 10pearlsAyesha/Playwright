@@ -51,7 +51,7 @@ module.exports = defineConfig({
           // Configure the device to simulate a desktop screen
           ...devices['Desktop Chrome'],
           // Configure the launch options for Chromium
-          viewport: { width: 1520, height: 855 },
+          viewport: { width: 1520, height: 800 },
           launchOptions: {
             args: ['--start-maximized'] // Start Chromium with a maximized window
           },

@@ -16,8 +16,6 @@ class submitRatingCase {
 
   //Actions  
   async submitRatingThroughHistory() {
-    await this.historyTab.click();
-
     // try {
     //   await this.rejoinModalCloseButton.click();
     // } catch (error) {
@@ -25,8 +23,6 @@ class submitRatingCase {
     // }
 
     try {
-      await this.actionRequired.click();
-      await this.addRatingButton.click();
       await this.howDidIDoRating.click();
       await this.whatCanIImproveTag.click();
       await this.howWasTheConnectionQualityRating.click();
