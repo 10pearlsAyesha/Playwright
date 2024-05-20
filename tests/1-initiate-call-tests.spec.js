@@ -12,7 +12,7 @@ test.describe("User is on Get a Jeenie page", () => {
     await loginPage.loginCustomer();
   });
 
-  test.only("Customer initiates a call and cancel it", async ({ page }) => {
+  test("Customer initiates a call and cancel it", async ({ page }) => {
     const InitiateCall = new initiateCallCase(page);
 
     await InitiateCall.initiateCallThroughCustomer();

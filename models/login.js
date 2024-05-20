@@ -2,8 +2,8 @@
 class LoginPage {
   constructor(page) {
     this.page = page;
-    this.email = page.locator('#input-31');
-    this.password = page.locator('#input-35');
+    this.email = page.locator("//input[@data-automation-name='email']");
+    this.password = page.locator("//input[@data-automation-name='password']");    
     this.loginButton = page.locator('#loginbtn');
     this.ratingModalCloseButton = page.locator('.v-card__title > .v-btn');
     this.rejoinModalCloseButton = page.locator("//div[@class='in-call-status pa-8 v-card v-sheet theme--light']//button[@class='v-btn v-btn--icon v-btn--round theme--light v-size--default']");

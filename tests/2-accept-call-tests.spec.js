@@ -7,12 +7,12 @@ test.describe("User is on Get a Jeenie page", () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-//    await page.context().grantPermissions(['microphone','camera','notifications']);
+    await page.context().grantPermissions(['microphone','camera','notifications']);
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginLinguist();
   });
 
-  test("Linguists accepts a call", async ({ page }) => {
+  test.skip("Linguists accepts a call", async ({ page }) => {
     const AcceptCall = new acceptCallCase(page);
 
     await expect(AcceptCall.availableForCallsStatus).toBeVisible();

@@ -13,7 +13,7 @@ test.describe("User is on History page", () => {
     await loginPage.loginCustomer();
   });
 
-  test.only("Submitting the rating", async ({ page }) => {
+  test("Submitting the rating", async ({ page }) => {
     const submitRating = new submitRatingCase(page);
 
     await submitRating.historyTab.click();
