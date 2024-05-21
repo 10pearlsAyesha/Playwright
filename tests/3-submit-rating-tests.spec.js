@@ -2,7 +2,6 @@ const { test, expect } = require('@playwright/test');
 const LoginPage = require("../models/login");
 const submitRatingCase = require("../models/submitRating")
 
-// example.spec.js
 test.describe("User is on History page", () => {
 
   test.beforeEach(async ({ page }) => {

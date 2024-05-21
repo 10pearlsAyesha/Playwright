@@ -1,8 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const LoginPage = require("../models/login");
 
-// example.spec.js
-test.describe("Login Page", () => {
+test.describe("User is on Login Page", () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.BASE_URL}`);

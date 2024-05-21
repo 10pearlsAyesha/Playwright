@@ -4,6 +4,17 @@ class ProfilePage {
     this.page = page;
     this.loggedinUserName = page.locator(".toggle-container");
     this.editIcon = page.locator(".align-self-start.ml-auto.cursor-pointer");
+
+    this.profilePictureEditIcon = page.locator("//div[@class='pad']//img[@class='edit']");
+    this.uploadImageButton = page.locator("//span[@class='v-btn__content'][contains(text(),'Upload Image')]");
+    this.saveImageButton = page.locator("//div[@class='edit-profile-photo c-popup']//span[@class='v-btn__content'][contains(text(),'Save')]");
+    this.imageUploadedOnProfile = page.locator("//div[@class='bio']//div[@class='pad']//img[contains(@src,'profile-photos')]");
+    this.imageUploadedOnHeader = page.locator("//div[contains(@class,'right-menu')]//div[@class='pad']//img[contains(@src,'profile-photos')]");
+ 
+    this.removeImageButton = page.locator("//span[@class='v-btn__content'][contains(text(),'Remove Image')]");
+    this.imageRemovedFromProfile = page.locator("//div[@class='bio']//div[@class='pad']//img[contains(@src,'userimage')]");
+    this.imageRemovedFromHeader = page.locator("//div[contains(@class,'right-menu')]//div[@class='pad']//img[contains(@src,'userimage')]");
+
     this.displayNameField = page.locator("(//div[@class='v-text-field__slot'])[1]//input");
     this.firstNameField = page.locator("(//div[@class='v-text-field__slot'])[2]//input");
     this.lastNameField = page.locator("(//div[@class='v-text-field__slot'])[3]//input");
@@ -23,8 +34,6 @@ class ProfilePage {
 
   //Actions  
   async updateProfile() {
-    await this.loggedinUserName.click();
-    await this.editIcon.click();
     await this.displayNameField.clear();
     await this.displayNameField.type(`${process.env.customer_display_name}`);
     await this.firstNameField.clear();
