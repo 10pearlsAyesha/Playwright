@@ -4,17 +4,18 @@ const LoginPage = require("../models/login");
 const ProfilePage = require("../models/updateProfile");
 
 test.describe("User is on Profile Page", () => {
+let profilePage;
 
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
+
+    profilePage = new ProfilePage(page);
 
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
   });
 
   test("User uploads a profile picture", async ({ page }) => {
-    const profilePage = new ProfilePage(page);
-
     await profilePage.loggedinUserName.click();
     await profilePage.editIcon.click();
     await profilePage.profilePictureEditIcon.click();
@@ -32,8 +33,6 @@ test.describe("User is on Profile Page", () => {
   });
   
   test("User removes a profile picture", async ({ page }) => {
-    const profilePage = new ProfilePage(page);
-
     await profilePage.loggedinUserName.click();
     await profilePage.editIcon.click();
     await profilePage.profilePictureEditIcon.click();  
@@ -43,9 +42,7 @@ test.describe("User is on Profile Page", () => {
     await expect(profilePage.imageRemovedFromHeader).toBeVisible(); 
   });
 
-  test("User updates his profile", async ({ page }) => {
-    const profilePage = new ProfilePage(page);
-
+  test("User updates his profile", async () => {
     await profilePage.loggedinUserName.click();
     await profilePage.editIcon.click();
     await profilePage.updateProfile();
