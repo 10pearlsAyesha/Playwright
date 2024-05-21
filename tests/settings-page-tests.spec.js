@@ -3,28 +3,29 @@ const LoginPage = require("../models/login");
 const SettingsPage = require("../models/settings");
 
 test.describe("User is on Settings Page", () => {
-  let loginPage;
-  let settingsPage;
+//  let settingsPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.BASE_URL}`);
+    const loginPage = new LoginPage(page);
 
-    loginPage = new LoginPage(page);
-    settingsPage = new SettingsPage(page);
+    await page.goto(`${process.env.BASE_URL}`);
+    await loginPage.loginCustomer();
   });
 
-  test("User changes platform language", async () => {
+  test.only("User changes platform language", async ({ page }) => {
+    const settingsPage = new SettingsPage(page);
+
     await settingsPage.platformLanguage();
   });
 
-  test("", async () => {
-  });
+  // test("", async () => {
+  // });
 
-  test("", async () => {
-  });
+  // test("", async () => {
+  // });
 
-  test("", async () => {
-  });
+  // test("", async () => {
+  // });
 
   test("User logs out from Jeenie site", async () => {
     await settingsPage.settingsTab.click();
