@@ -43,6 +43,10 @@ class LoginPage {
     await this.password.type(`${process.env.member_password}`);
     await this.loginButton.click();
   }
+
+  async loginCustomerWithNewPassword(){
+    
+  }
 }
 
 module.exports = LoginPage;

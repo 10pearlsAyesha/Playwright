@@ -3,9 +3,10 @@ const LoginPage = require("../models/login");
 const SettingsPage = require("../models/settings");
 
 test.describe("User is on Settings Page", () => {
+let loginPage; 
 
   test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
+    loginPage = new LoginPage(page);
     const settingsPage = new SettingsPage(page);
 
     await page.goto(`${process.env.BASE_URL}`);
@@ -25,27 +26,34 @@ test.describe("User is on Settings Page", () => {
     await settingsPage.support();
   });
 
-  test.only("User sees privacy terms and policies", async ({ page }) => {
+  test("User sees privacy terms, policies and delete account form", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
-    const newPage = await settingsPage.privacyTermsOfUse();
+    //Terms Of Use
+    const termsOfUsePage = await settingsPage.privacyTermsOfUse();
+    await expect(termsOfUsePage).toHaveURL(`${process.env.terms_of_use_link}`);
 
-    await expect(newPage).toHaveURL(`${process.env.terms_of_use_link}`);
+    await termsOfUsePage.close();
 
-    // const settingsPage = new SettingsPage(page);
-
-    // settingsPage.privacy();
-
-    // settingsPage.privacyOption.click();
+    await expect(page).toHaveURL(`${process.env.SETTINGS_PAGE_URL}`);
     
-    // const [newPage] = await Promise.all([
-    //   page.context().waitForEvent('page'),
-    //   await settingsPage.termsOfUseOption.click()
-    // ]);
-  
-    // await newPage.waitForLoadState();
-    // await expect(newPage).toHaveURL(`${process.env.terms_of_use_link}`);
-    // await expect(settingsPage.termsOfUseHeading).toBeVisible(); 
+    //Privacy Policy
+    const privacyPolicyPage = await settingsPage.privacyPolicy();
+    await expect(privacyPolicyPage).toHaveURL(`${process.env.privacy_policy_link}`);
+
+    await privacyPolicyPage.close();
+
+    await expect(page).toHaveURL(`${process.env.SETTINGS_PAGE_URL}`);
+
+    //Delete Account Form
+    settingsPage.privacyDeleteAccount();
+  });
+
+  test.only("User changes account password", async ({ page }) => {
+    const settingsPage = new SettingsPage(page);
+
+    await settingsPage.changePassword();
+    await loginPage.loginCustomerWithNewPassword();
   });
 
   test("User logs out from Jeenie site", async ({ page }) => {
