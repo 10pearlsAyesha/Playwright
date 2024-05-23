@@ -45,7 +45,9 @@ class LoginPage {
   }
 
   async loginCustomerWithNewPassword(){
-    
+    await this.email.type(`${process.env.customer_email}`);
+    await this.password.type(`${process.env.new_password}`);
+    await this.loginButton.click();    
   }
 }
 

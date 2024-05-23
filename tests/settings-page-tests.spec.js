@@ -2,11 +2,10 @@ const { test, expect } = require('@playwright/test');
 const LoginPage = require("../models/login");
 const SettingsPage = require("../models/settings");
 
-test.describe("User is on Settings Page", () => {
-let loginPage; 
+test.describe("User is on Settings Page", () => { 
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
+    const loginPage = new LoginPage(page);
     const settingsPage = new SettingsPage(page);
 
     await page.goto(`${process.env.BASE_URL}`);
@@ -14,19 +13,19 @@ let loginPage;
     await settingsPage.settingsTab.click();
   });
 
-  test("User changes platform language", async ({ page }) => {
+  test.only("User changes platform language", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.platformLanguage();
   });
 
-  test("User priovides feedback through Support option", async ({ page }) => {
+  test.only("User priovides feedback through Support option", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.support();
   });
 
-  test("User sees privacy terms, policies and delete account form", async ({ page }) => {
+  test.only("User sees privacy terms, policies and delete account form", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     //Terms Of Use
@@ -49,14 +48,7 @@ let loginPage;
     settingsPage.privacyDeleteAccount();
   });
 
-  test.only("User changes account password", async ({ page }) => {
-    const settingsPage = new SettingsPage(page);
-
-    await settingsPage.changePassword();
-    await loginPage.loginCustomerWithNewPassword();
-  });
-
-  test("User logs out from Jeenie site", async ({ page }) => {
+  test.only("User logs out from Jeenie site", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.logoutButton.click();

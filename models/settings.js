@@ -97,11 +97,18 @@ class SettingsPage {
 
   //Change Password
   async changePassword() {
-    await this.privacyOption.click();
     await this.changePasswordOption.click();
     await this.currentPwdField.type(`${process.env.customer_password}`);
     await this.newPwdField.type(`${process.env.new_password}`);
-    await this.confirmPwdField.type(`${process.env.confirm_password}`);
+    await this.confirmPwdField.type(`${process.env.new_password}`);
+    await this.changePwdSaveButton.click();
+  }
+
+  async resetPassword() {
+    await this.changePasswordOption.click();
+    await this.currentPwdField.type(`${process.env.new_password}`);
+    await this.newPwdField.type(`${process.env.customer_password}`);
+    await this.confirmPwdField.type(`${process.env.customer_password}`);
     await this.changePwdSaveButton.click();
   }
 }
