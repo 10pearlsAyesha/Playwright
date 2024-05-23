@@ -15,7 +15,8 @@ let profilePage;
     await loginPage.loginCustomer();
   });
 
-  test("User uploads a profile picture", async ({ page }) => {
+  test("User uploads and removes a profile picture", async ({ page }) => {
+    //uploads picture
     await profilePage.loggedinUserName.click();
     await profilePage.editIcon.click();
     await profilePage.profilePictureEditIcon.click();
@@ -24,24 +25,22 @@ let profilePage;
       const filePath = path.resolve(__dirname, "../profile-picture/image-1.jpg");  
       await fileChooser.setFiles(filePath);
     });
-  
+
     await profilePage.uploadImageButton.click();
     await profilePage.saveImageButton.click();
     await page.waitForTimeout(3000);
     await expect(profilePage.imageUploadedOnProfile).toBeVisible(); 
     await expect(profilePage.imageUploadedOnHeader).toBeVisible(); 
-  });
-  
-  test("User removes a profile picture", async ({ page }) => {
-    await profilePage.loggedinUserName.click();
-    await profilePage.editIcon.click();
+    await page.waitForTimeout(3000);
+
+    //removes picture
     await profilePage.profilePictureEditIcon.click();  
     await profilePage.removeImageButton.click();
     await page.waitForTimeout(3000);
     await expect(profilePage.imageRemovedFromProfile).toBeVisible(); 
     await expect(profilePage.imageRemovedFromHeader).toBeVisible(); 
   });
-
+  
   test("User updates his profile", async () => {
     await profilePage.loggedinUserName.click();
     await profilePage.editIcon.click();
