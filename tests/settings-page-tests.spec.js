@@ -13,19 +13,19 @@ test.describe("User is on Settings Page", () => {
     await settingsPage.settingsTab.click();
   });
 
-  test.only("User changes platform language", async ({ page }) => {
+  test("User changes platform language", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.platformLanguage();
   });
 
-  test.only("User priovides feedback through Support option", async ({ page }) => {
+  test("User priovides feedback through Support option", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.support();
   });
 
-  test.only("User sees privacy terms, policies and delete account form", async ({ page }) => {
+  test("User sees privacy terms, policies and delete account form", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     //Terms Of Use
@@ -48,7 +48,7 @@ test.describe("User is on Settings Page", () => {
     settingsPage.privacyDeleteAccount();
   });
 
-  test.only("User logs out from Jeenie site", async ({ page }) => {
+  test("User logs out from Jeenie site", async ({ page }) => {
     const settingsPage = new SettingsPage(page);
 
     await settingsPage.logoutButton.click();
