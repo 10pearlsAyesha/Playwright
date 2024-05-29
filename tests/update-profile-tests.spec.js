@@ -13,6 +13,7 @@ let profilePage;
 
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
+    await loginPage.closeModals();
   });
 
   test("User uploads and removes a profile picture", async ({ page }) => {

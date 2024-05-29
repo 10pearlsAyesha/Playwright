@@ -10,6 +10,7 @@ test.describe("User is on History page", () => {
     await page.context().grantPermissions(['camera', 'microphone']);
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
+    await loginPage.closeModals();
   });
 
   test("Submitting the rating", async ({ page }) => {

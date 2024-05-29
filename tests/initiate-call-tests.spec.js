@@ -10,6 +10,7 @@ test.describe("User is on Get a Jeenie page", () => {
     await page.context().grantPermissions(['camera', 'microphone']);
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
+    await loginPage.closeModals();
   });
 
   test("Customer initiates a call and cancel it", async ({ page }) => {

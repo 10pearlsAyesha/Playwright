@@ -3,31 +3,27 @@ const LoginPage = require("../models/login");
 const SettingsPage = require("../models/settings");
 
 test.describe("User is on Settings Page", () => { 
+let settingsPage;
 
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const settingsPage = new SettingsPage(page);
+    settingsPage = new SettingsPage(page);
 
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginCustomer();
+    await loginPage.closeModals();
     await settingsPage.settingsTab.click();
   });
 
   test("User changes platform language", async ({ page }) => {
-    const settingsPage = new SettingsPage(page);
-
     await settingsPage.platformLanguage();
   });
 
   test("User priovides feedback through Support option", async ({ page }) => {
-    const settingsPage = new SettingsPage(page);
-
     await settingsPage.support();
   });
 
   test("User sees privacy terms, policies and delete account form", async ({ page }) => {
-    const settingsPage = new SettingsPage(page);
-
     //Terms Of Use
     const termsOfUsePage = await settingsPage.privacyTermsOfUse();
     await expect(termsOfUsePage).toHaveURL(`${process.env.terms_of_use_link}`);
@@ -49,8 +45,6 @@ test.describe("User is on Settings Page", () => {
   });
 
   test("User logs out from Jeenie site", async ({ page }) => {
-    const settingsPage = new SettingsPage(page);
-
     await settingsPage.logoutButton.click();
   });
 });
