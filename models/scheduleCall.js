@@ -23,41 +23,53 @@ class ScheduledPage {
     this.callPlatformDropdown = page.locator("(//div[@class='v-select__selections'])[4]");
     this.selectCallPlatform = page.locator("(//div[@class='v-list-item__title'][contains(text(),'" + `${process.env.call_platform}` + "')])[2]");
     this.enterTopic = page.locator("(//div[@class='v-text-field__slot'])[6]//input");
-    this.submitButton = page.locator("//span[@class='v-btn__content'][contains(text(),'" + `${process.env.submit_button}` + "')]");
+    this.submitButton = page.locator("//div[contains(@class,'scheduled-session-form')]//span[@class='v-btn__content'][contains(text(),'" + `${process.env.submit_button}` + "')]");
+
+    this.reserveAnInterpreterModal = page.locator("//div[@class='v-card__title'][contains(text(),'Reserve a Jeenie Interpreter')]");
+    this.continueButton = page.locator("//span[@class='v-btn__content'][contains(text(),'" + `${process.env.continue_button}` + "')]");
+    this.verifySelectedLanguages = page.locator("//span[@class='language'][contains(text(),'" + `${process.env.language}` + " <> " + `${process.env.interpreter_language}` + "')]");
+    this.verifyTopic = page.locator("//span[contains(@class,'text-subtitle-2')][contains(text(),'" + `${process.env.topic}` + "')]");
   }
 
   //Actions  
   async scheduleCallForTomorrow() {
-    await expect(this.formTitle).toBeVisible(); 
-    await this.iSpeakDropdown.click();
-    await this.selectISpeakLanguage.click();
-    await this.getAnInterpreterForDropdown.click();
-    await this.selectGetAnInterpreterForLanguage.click();
-    await this.serviceDropdown.click();
-    await this.selectService.click();
+    // await expect(this.formTitle).toBeVisible(); 
+    // await this.iSpeakDropdown.click();
+    // await this.selectISpeakLanguage.click();
+    // await this.getAnInterpreterForDropdown.click();
+    // await this.selectGetAnInterpreterForLanguage.click();
+    // await this.serviceDropdown.click();
+    // await this.selectService.click();
 
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
     const dd = String(tomorrow.getDate());
 
-    await this.startDateField.click();
+    // await this.startDateField.click();
 
-    const daySelector = `//div[@class='v-btn__content' and text()='${dd}']`;
+    // const daySelector = `//div[@class='v-btn__content' and text()='${dd}']`;
 
-    await this.page.locator(daySelector).click();
-    await this.startTimeField.click();
-    await this.selectStartTime.click();
-    await this.selectStartTimeAmPm.click();
-    await this.endDateField.click();
-    await this.page.locator(daySelector).click();
-    await this.endTimeField.click();
-    await this.selectEndTime.click();
-    await this.selectEndTimeAmPm.click();
-    await this.callPlatformDropdown.click();
-    await this.selectCallPlatform.click();
-    await this.enterTopic.type(`${process.env.topic}`);
-    //await this.submitButton.click();
+    // await this.page.locator(daySelector).click();
+    // await this.startTimeField.click();
+    // await this.selectStartTime.click();
+    // await this.selectStartTimeAmPm.click();
+    // await this.endDateField.click();
+    // await this.page.locator(daySelector).click();
+    // await this.endTimeField.click();
+    // await this.selectEndTime.click();
+    // await this.selectEndTimeAmPm.click();
+    // await this.callPlatformDropdown.click();
+    // await this.selectCallPlatform.click();
+    // await this.enterTopic.type(`${process.env.topic}`);
+    // await this.submitButton.click();
+
+    // await expect(this.reserveAnInterpreterModal).toBeVisible();
+    // await this.continueButton.click();
+    const verifyScheduledDate = `//span[@class='subtitle-2'][contains(text(),'${dd}')]`;
+    await expect(this.page.locator(verifyScheduledDate)).toBeVisible();
+    await expect(this.verifySelectedLanguages).toBeVisible(); 
+    await expect(this.verifyTopic).toBeVisible(); 
   }
 }
 

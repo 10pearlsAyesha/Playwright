@@ -3,23 +3,33 @@ const LoginPage = require("../models/login");
 const ScheduledPage = require('../models/scheduleCall');
 
 test.describe("User is on Scheduled page", () => {
+let loginPage; 
+let scheduleCall;
 
   test.beforeEach(async ({ page }) => {
-    const loginPage = new LoginPage(page);
-
     await page.goto(`${process.env.BASE_URL}`);
-    await loginPage.loginOwner();
-    await loginPage.closeModals();
+
+    loginPage = new LoginPage(page);
+    scheduleCall = new ScheduledPage(page);
   });
 
-  test.only("Owner schedules a call for tomorrow", async ({ page }) => {
-    const scheduleCall = new ScheduledPage(page);
+  test("Owner schedules a call for tomorrow", async ({ page }) => {
+    await loginPage.loginOwnerEnterpPayg();
+    await loginPage.closeModals();
+
+    await scheduleCall.scheduledTab.click();
+    await scheduleCall.reserveAFutureCallTimeButton.click();
+    await scheduleCall.scheduleCallForTomorrow();
+  });
+  
+  test("Member schedules a call for tomorrow", async ({ page }) => {
+    await loginPage.loginMember();
+    await loginPage.closeModals();
 
     await scheduleCall.scheduledTab.click();
     await scheduleCall.reserveAFutureCallTimeButton.click();
     await scheduleCall.scheduleCallForTomorrow();
     await page.pause();
   });
-  
 });
   

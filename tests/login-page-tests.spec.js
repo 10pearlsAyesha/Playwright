@@ -23,8 +23,19 @@ test.describe("User is on Login Page", () => {
     await expect(loginPage.getAJeeniePage).toBeVisible();  
   });
 
-  test("Owner logs-in into Jeenie site", async () => {
-    await loginPage.loginOwner();
+  test("Owner Enterprise Payg logs-in into Jeenie site", async () => {
+    await loginPage.loginOwnerEnterpPayg();
+    await loginPage.closeModals();
+    await expect(loginPage.getAJeeniePage).toBeVisible();  
+  });
+  test("Owner Enterprise Sub logs-in into Jeenie site", async () => {
+    await loginPage.loginOwnerEnterpSub();
+    await loginPage.closeModals();
+    await expect(loginPage.getAJeeniePage).toBeVisible();  
+  });
+
+  test("Owner Healthcare logs-in into Jeenie site", async () => {
+    await loginPage.loginOwnerHealthcareSub();
     await loginPage.closeModals();
     await expect(loginPage.getAJeeniePage).toBeVisible();  
   });

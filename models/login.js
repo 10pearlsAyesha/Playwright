@@ -25,9 +25,21 @@ class LoginPage {
     await this.loginButton.click();
   }
 
-  async loginOwner() {
-    await this.email.type(`${process.env.owner_email}`);
-    await this.password.type(`${process.env.owner_password}`);
+  async loginOwnerEnterpPayg() {
+    await this.email.type(`${process.env.owner_enterp_payg_email}`);
+    await this.password.type(`${process.env.owner_enterp_payg_password}`);
+    await this.loginButton.click();
+  }
+
+  async loginOwnerEnterpSub() {
+    await this.email.type(`${process.env.owner_enterp_sub_email}`);
+    await this.password.type(`${process.env.owner_enterp_sub_password}`);
+    await this.loginButton.click();
+  }
+
+  async loginOwnerHealthcareSub() {
+    await this.email.type(`${process.env.owner_healthcare_sub_email}`);
+    await this.password.type(`${process.env.owner_healthcare_sub_password}`);
     await this.loginButton.click();
   }
 
