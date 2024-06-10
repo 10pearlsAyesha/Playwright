@@ -13,7 +13,7 @@ let externalLinks;
     externalLinks = new ExternalLinks(page);
   });
 
-  test("Owner Enterprise Sub verifies Help, Resource Center, App Store & Google Play links of Jeenie App", async ({ page }) => {
+  test("Owner Enterprise Sub verifies Help, Resource Center, App Store & Google Play links of Jeenie App", async ({ }) => {
     await loginPage.loginOwnerEnterpSub();
     await loginPage.closeModals();
     await externalLinks.verifyHowCanWeHelpLink();
@@ -27,6 +27,5 @@ let externalLinks;
     await loginPage.closeModals();
     await externalLinks.resourceCenterLink.click();
   });
-
 });
   
