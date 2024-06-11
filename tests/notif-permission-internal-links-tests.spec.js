@@ -12,7 +12,7 @@ test.describe("User is logged-in", () => {
     await loginPage.closeModals();
   });
 
-  test.only("Linguist verifies the notification permission internal link of Jeenie App", async ({ page }) => {
+  test("Linguist verifies the notification permission internal link of Jeenie App", async ({ page }) => {
     const internalLink = new InternalLink(page);
     await internalLink.verifyNotificationPermissionMoreInfoLink();
   });
