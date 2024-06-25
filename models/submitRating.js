@@ -16,12 +16,6 @@ class submitRatingCase {
 
   //Actions  
   async submitRatingThroughHistory() {
-    // try {
-    //   await this.rejoinModalCloseButton.click();
-    // } catch (error) {
-    //   //do nothing
-    // }
-
     try {
       await this.howDidIDoRating.click();
       await this.whatCanIImproveTag.click();
@@ -32,8 +26,6 @@ class submitRatingCase {
     } catch (error) {
       console.log("No rating found to submit");
     }
-
-
   }
 }
 
