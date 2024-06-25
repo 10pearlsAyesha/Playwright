@@ -13,15 +13,18 @@ let scheduleCall;
     scheduleCall = new ScheduledPage(page);
   });
 
+  //------------------not working right now due to payment issue-------------------//
   test("Owner schedules a call for tomorrow", async ({ page }) => {
-    await loginPage.loginOwnerEnterpPayg();
+    await loginPage.loginOwnerEnterpMonthly();
     await loginPage.closeModals();
 
     await scheduleCall.scheduledTab.click();
     await scheduleCall.reserveAFutureCallTimeButton.click();
     await scheduleCall.scheduleCallForTomorrow();
+    await page.pause();
   });
   
+  //------------------not working right now due to payment issue-------------------//
   test("Member schedules a call for tomorrow", async ({ page }) => {
     await loginPage.loginMember();
     await loginPage.closeModals();

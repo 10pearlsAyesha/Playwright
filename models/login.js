@@ -43,6 +43,12 @@ class LoginPage {
     await this.loginButton.click();
   }
 
+  async loginOwnerEnterpMonthly() {
+    await this.email.type(`${process.env.owner_enterp_monthly_email}`);
+    await this.password.type(`${process.env.owner_enterp_monthly_password}`);
+    await this.loginButton.click();
+  }
+
   async loginMember() {
     await this.email.type(`${process.env.member_email}`);
     await this.password.type(`${process.env.member_password}`);

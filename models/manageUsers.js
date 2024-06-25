@@ -17,6 +17,7 @@ class ManageUsersPage {
     this.successModalOkButton = page.locator("(//span[@class='v-btn__content'][contains(text(),'Ok')])[2]");
     this.newUserEmail = page.locator("//table//tr//td[text()='" + `${process.env.new_user_email}` + "']");
     this.searchBar = page.locator("//div//input[@placeholder='Search...']");
+    this.verifySearchResults = page.locator("//div//input[@placeholder='Search...']");
 
     this.updateUserButton = page.locator("//td//button[1]");
     this.editFormTitle = page.locator("//div[@class='v-card__title'][contains(text(),'Edit User')]");
@@ -35,7 +36,6 @@ class ManageUsersPage {
     this.resendInvitationModalTitle = page.locator("//div[@class='v-card__title headline'][contains(text(),'Resend Invitation')]");
     this.sendInviteButton = page.locator("//span[text()='" + `${process.env.send_invite_button}` + "']");
     this.invitationSentSuccessMsg = page.locator("//span[text()='" + `${process.env.invitation_sent_success_msg}` + "']");
-
   }
 
   //Actions  
@@ -57,11 +57,12 @@ class ManageUsersPage {
     await this.successModalOkButton.click();
 
     const newUserEmailLocator = this.page.locator(`//table//tr//td[contains(text(),'${this.addUserEmail}')]`);
-
     await expect(newUserEmailLocator).toBeVisible();
   
     await this.searchBar.type(this.addUserEmail);
     await this.searchBar.press('Enter');
+    const newUserSearchResults = this.page.locator(`//table//tr[1]//td[contains(text(),'${this.addUserEmail}')]`);
+    await expect(newUserSearchResults).toBeVisible();
   }
 
   async updateUser() {
@@ -102,7 +103,6 @@ class ManageUsersPage {
     await this.invitedTab.click();
 
     const newUserEmailLocator = this.page.locator(`//table//tr//td[contains(text(),'${this.inviteUserEmail}')]`);
-
     await expect(newUserEmailLocator).toBeVisible();
   
     await this.searchBar.type(this.inviteUserEmail);

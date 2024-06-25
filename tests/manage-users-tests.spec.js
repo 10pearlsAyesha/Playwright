@@ -12,7 +12,7 @@ test.describe("User is on Manage Users page", () => {
     await loginPage.closeModals();
   });
 
-  test("Add, update, delete, invite user and resend invite", async ({ page }) => {
+  test("Add, update, delete, invite user, resend invite and search user", async ({ page }) => {
     const manageUser = new ManageUsersPage(page);
 
     await manageUser.manageUsersTab.click();
