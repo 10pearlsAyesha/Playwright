@@ -41,8 +41,9 @@ class historyPage {
 
     this.downloadCsvButton = page.locator("//img[contains(@class,'download-btn')]");
     this.callHistoryDownloadTitle = page.locator("//div[contains(@class,'download-title')][text()='Call History Download']");
-    //this. = page.locator("");
-
+    this.selectedDateRange = page.locator("//input[@id='call-history-datepicker']");
+    this.getExportedRowsCount = page.locator("//div[contains(@class,'v-card__text')]//div[1]");
+    this.confirmButton = page.locator("//span[@class='v-btn__content'][text()='" + `${process.env.confirm_button}` + "']");
   }
 
   //Actions  
@@ -75,6 +76,22 @@ class historyPage {
     await this.resetFilterLink.click();
     await this.page.waitForTimeout(4000);
     await expect(this.getTotalRecordsCount).toHaveText(totalRecords);
+  }
+
+  async checkCallDetails() {
+    await this.moreDetailsIcon.click();
+
+    let detailedDateAndTimeValue = await this.detailedDateAndTime.textContent();
+    detailedDateAndTimeValue = detailedDateAndTimeValue.replace('|', '').trim();
+    const detailedLanguageValue = await this.detailedLanguage.textContent();
+    const detailedLinguistNameValue = await this.detailedLinguistName.textContent();
+    const detailedLinguistIDValue = await this.detailedLinguistID.textContent();
+
+    await expect(this.listedDateAndTime).toHaveText(detailedDateAndTimeValue);
+    await expect(this.listedLanguage).toHaveText(detailedLanguageValue);
+    await expect(this.listedLinguistName).toHaveText(detailedLinguistNameValue);
+    await expect(this.listedLinguistID).toHaveText(detailedLinguistIDValue);
+    await this.closeIconCallDetailsModal.click();
   }
 
   async selectDate(day) {
@@ -113,25 +130,20 @@ class historyPage {
   }
 
   async downloadCSV() {
+    const totalRecordsCount = await this.getTotalRecordsCount.textContent();
+    const totalRecordsMatch = totalRecordsCount.match(/of (\d+)/);
+    const totalRecords = totalRecordsMatch ? totalRecordsMatch[1] : null;
+
     await this.downloadCsvButton.click();
     await expect(this.callHistoryDownloadTitle).toBeVisible();
 
-  }
+    const exportedRowsText = await this.getExportedRowsCount.textContent();
+    const exportedRowsMatch = exportedRowsText.match(/export (\d+) rows/);
+    const exportedRowsCount = exportedRowsMatch ? exportedRowsMatch[1] : null;
 
-  async checkCallDetails() {
-    await this.moreDetailsIcon.click();
+    expect(totalRecords).toBe(exportedRowsCount);
 
-    let detailedDateAndTimeValue = await this.detailedDateAndTime.textContent();
-    detailedDateAndTimeValue = detailedDateAndTimeValue.replace('|', '').trim();
-    const detailedLanguageValue = await this.detailedLanguage.textContent();
-    const detailedLinguistNameValue = await this.detailedLinguistName.textContent();
-    const detailedLinguistIDValue = await this.detailedLinguistID.textContent();
-
-    await expect(this.listedDateAndTime).toHaveText(detailedDateAndTimeValue);
-    await expect(this.listedLanguage).toHaveText(detailedLanguageValue);
-    await expect(this.listedLinguistName).toHaveText(detailedLinguistNameValue);
-    await expect(this.listedLinguistID).toHaveText(detailedLinguistIDValue);
-    await this.closeIconCallDetailsModal.click();
+    await this.confirmButton.click();
   }
 }
 

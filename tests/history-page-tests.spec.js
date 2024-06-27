@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const LoginPage = require("../models/login");
 const historyPage = require("../models/history")
 
@@ -9,20 +9,18 @@ test.describe("User is on History page", () => {
 
     await page.goto(`${process.env.BASE_URL}`);
     await loginPage.loginOwnerEnterpPayg();
-//    await loginPage.closeModals();
+    await loginPage.closeModals();
   });
 
-  test.only("Apply filter, reset filter, search by Date range, check call details and download CSV", async ({ page }) => {
+  test("Apply filter, reset filter, check call details, search by Date range, verify applied date range results and download CSV", async ({ page }) => {
     const history = new historyPage(page);
 
     await history.historyTab.click();
-    // await history.applyAndResetFilter();
-    // await history.searchByDateRange();
-    // await history.verifyAppliedDateRangeResults();
+    await history.applyAndResetFilter();
+    await history.checkCallDetails();
+    await history.searchByDateRange();
+    await history.verifyAppliedDateRangeResults();
     await history.downloadCSV();
-//  await history.checkCallDetails();
-    await page.pause();
   });
-  
 });
   

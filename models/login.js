@@ -58,9 +58,9 @@ class LoginPage {
   async closeModals() {
     try {
       await this.ratingModalCloseButton.click();
-      await this.wait(4000);
+      await this.wait(2000);
       await this.rejoinModalCloseButton.click();
-      await this.wait(4000);
+      await this.wait(2000);
     } catch (error) {
       //do nothing
     }
