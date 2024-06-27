@@ -103,10 +103,18 @@ class historyPage {
 
     await this.page.waitForTimeout(3000);
     await this.searchForDateRangeField.click();
-    await this.calendarPreviousArrow.click();
+
+    for (let i = 0; i < 6; i++) {
+      await this.calendarPreviousArrow.click();
+    }
+
     await this.page.waitForTimeout(2000);
     await this.selectDate('1'); // Select the start date: 1st of the last month
-    await this.calendarNextArrow.click();
+
+    for (let i = 0; i < 6; i++) {
+      await this.calendarNextArrow.click();
+    }
+    
     await this.page.waitForTimeout(2000);
     await this.selectDate(String(today.getDate())); // Select the end date: today
     await this.page.waitForTimeout(3000);
@@ -144,6 +152,7 @@ class historyPage {
     expect(totalRecords).toBe(exportedRowsCount);
 
     await this.confirmButton.click();
+    await expect(this.callHistoryDownloadTitle).toBeVisible();
   }
 }
 
