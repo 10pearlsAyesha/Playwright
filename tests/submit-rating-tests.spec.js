@@ -15,7 +15,7 @@ let submitRating;
     await loginPage.closeModals();
   });
 
-  test.only("Customer submitting the good rating", async () => {
+  test("Customer submitting the good rating", async () => {
     await submitRating.historyTab.click();
     await submitRating.submitGoodRatingThroughHistory();
   });
