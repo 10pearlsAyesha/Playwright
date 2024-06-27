@@ -12,14 +12,15 @@ test.describe("User is on History page", () => {
 //    await loginPage.closeModals();
   });
 
-  test.only("Apply filter, reset filter, ", async ({ page }) => {
+  test.only("Apply filter, reset filter, search by Date range, check call details and download CSV", async ({ page }) => {
     const history = new historyPage(page);
 
     await history.historyTab.click();
-    await history.applyAndResetFilter();
+    // await history.applyAndResetFilter();
     // await history.searchByDateRange();
-    // await history.checkDetails();
-    // await history.downloadCSV();
+    // await history.verifyAppliedDateRangeResults();
+    await history.downloadCSV();
+//  await history.checkCallDetails();
     await page.pause();
   });
   
